@@ -630,9 +630,9 @@ main = do
   --xmproc1 <- spawnPipe ("xmobar -x 1 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   --xmproc2 <- spawnPipe ("xmobar -x 2 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   -- the xmonad, ya know...what the WM is named after!
-  xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ ewmh $ docks $ def
+  xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ ewmh . docks $ ewmhFullscreen $ def
     { manageHook         = myManageHook <+> manageDocks
-    --, handleEventHook    = docks
+    --, handleEventHook    =  docks
                            -- Uncomment this line to enable fullscreen support on things like YouTube/Netflix.
                            -- This works perfect on SINGLE monitor systems. On multi-monitor systems,
                            -- it adds a border around the window if screen does not have focus. So, my solution
