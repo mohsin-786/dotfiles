@@ -478,7 +478,8 @@ myKeys c =
   , ("M-q", addName "Kill focused window"    $ kill1)
   , ("M-y", addName "Toggle Bar"    $ spawn "polybar-msg cmd toggle")
   , ("M-o", addName "Launch Rofi"            $ spawn "rofi -no-lazy-grab -show drun")
-  , ("M-S-a", addName "Kill all windows on WS" $ killAll)]
+  , ("M-S-a", addName "Kill all windows on WS" $ killAll)
+  , ("M-<Print>" , addName "Screenshot" $ spawn "gnome-screenshot -i")]
   --, ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "~/.local/bin/dm-run"])
   --, ("M-/", addName "DTOS Help"                $ spawn "~/.local/bin/dtos-help")]
 
