@@ -1,0 +1,46 @@
+#Cluster:
+Cluster is a collection of Control Plane and worker nodes.
+kubectl is a command line tool which communicates with the Control Plane.
+Worker nodes is a node where applications or micro-services are running whichgets assigned by the Control Plane
+
+#Kubernetes Pod:
+It's a scheduling unit.
+{ 1. Create applications into a microservice.
+  2. Add every microservice in a container.
+  3. Put container in its pods.
+  4. Deploy these pods to controllers such as Deployment controllers(built-in controller of K8s)
+     (Controllers are control loops that watch the state of your cluster, then make or request changes where needed.Each controller tries to move 
+      the current cluster state to the desired state)
+}
+
+
+#Control Plane:
+Collection of various components that help us in managing the overall health of the cluster.
+Like setting up new pod, creating new pod, scale pod, destroy, expose etc. is managed by Control Plane
+
+Architecture:
+Components:
+
+1) API Server: kubectl communicates with this server like giving commands to do something. All communications happens via this server.
+
+2) etcd: it's a database that stores info of clusters.
+
+3) Controller Manager: It manages:
+		- Desired State
+		- Current State
+		- Differences
+		- Make changes
+
+4) Scheduler: It physically schedules the objects and stuffs.
+	      Scheduler will schedule it on the worker nodes
+
+
+
+
+#Architecture of worker nodes:
+
+1) kube-proxy:It is responsible for networking. It will make sure that every worker node we have will get its own IP address.
+
+2)kubelet: Its on every worker node. It will listen to the API server. Whenever a new worker node is created and attached to the control plane, kubelet will be installed on it.
+
+3)container runtime:

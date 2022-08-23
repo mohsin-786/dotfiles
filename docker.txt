@@ -1,0 +1,125 @@
+{ #Introduction:
+	
+	Earlier one application used to run on one server
+	If the users are more, the load on the server would increase
+	The only way to use more applications is to buy another server.
+
+	VMWare solved the problem- Virtual machines
+	But the problem was that the virtual machines required their own OS, like dual booting, partitioning , hardware allocation etc.
+}
+
+
+
+{ #Containers:
+
+	Containers solved the problem of VMWare, by running different instances of applications in the same OS without requiring different OSes or hardware allocation
+
+		#Docker:
+			Docker is a container platform that allows to build,test and deploy applications quickly.
+					Its parts:
+					1) Runtime:
+						It allows us to stop and start a container.
+						Its types:
+							a) runc - low-level runtime.
+							b) containerd - Its a CNCF project. 
+								- It manages runc.
+								- It also helps in managing containers.
+								- Helps in interacting containers to the network.
+								- Also used in kubernetes runtime.
+
+					 2) Engine: We use to interact with docker using docker cli.We've got docker daemon  , rest API(used to communicate).
+
+					 3) Orchestration: It allows us to manage containers.
+
+					    Running a "Dockerfile" gives us an "image",
+					    Running an "image" gives us the "container".
+}
+
+
+
+
+{ #Commands and images:
+
+		Docker images contains operating system files, dependencies for applications
+		Images are collection of files or layers.
+
+		1. docker run hello-world (hello-world is an image file, if not found then it well get it from the docker registry)
+		2. docker images (shows downloaded images)
+		3. docker pull <image-name>
+		4. docker pull <image-name>:<version>
+		5. docker run -it <image-name> (-it means interactive mode,i.e.,dont exit out of it)
+		6. docker ps (to see the containers that are running)
+		7. docker container exec -it <container ID> <what u wanna attach to the running container> (to attach the thing with the running container)
+		8. docker stop <container ID> (to stop the container)
+		9. docker ps -a (to show stopped containers)
+		10. docker rm <container ID> (to remove the container)
+		11. docker inspect <image-name or container ID> (to get info. on the container)
+		12. docker logs <Container ID or image-name> (to get logs of the particular container)
+		13. docker container prune -f (to delete all the containers)
+		14. docker run -d <image-name> (to run in the background)
+		15. docker run -d -p 8080:80 nginx (for port forwarding) 
+		16. docker commit -m "<changes in file>" <container ID> <name of the new image> (for generating new image)
+		17. docker images -q (shows only ID)
+		18. docker remove $(docker images -q) -f (to remove all images)
+		19. docker rmi <image ID>
+}
+
+
+
+
+{ #Dockerfile
+
+	touch Dockerfile (create dockerfile)
+			
+			#Inside Dockerfile:
+
+			FROM <base-package>
+			MAINTAINER <maintainer-name>
+			MKDIR <create-dir>
+			ADD <copy from host to container>
+			COPY <copy from host to container> (Better)
+			RUN <runs-command>
+			EXPOSE <port-number>
+			ENTRYPOINT <command runner>
+			CMD ["echo", "Hello World"] or any command.
+
+			
+			
+			Now,
+				- docker build -t <image-name> (the Dockerfile image) <path to image>
+				
+}
+
+
+{ #Docker Swarm:
+
+1) Technique used to create and maintain acluster of docker engines.
+2) Anything deployed in any node within the cluster can be accessed by other nodes of the same cluster.
+3) The host is the manager which manages other nodes.
+ 
+	#Features:
+	1) High availability.	--if one node goes down we can access its services from other nodes--
+	2) Auto-load balancing. 
+	3) Decentralized access. -- can access these nodes from anywhere with ssh --
+	4) Scalability. -- we can bring up number of services --
+	4) Rolling updates. -- Updates can be done without affecting other sservices --
+	
+	
+	
+			#Commands:
+			- docker swarm init --advertise-addr <ip-addr> (starts docker swarm and makes the <ip-addr> machine the manager)
+			- docker swarm join \ --token (will get the token to join by other nodes once swarm is initiated).
+			- docker service ls (lists services).
+			- docker node ls (shows nodes status)
+		   -* docker service create --name "<service-name>" <image-name> {can use port forwarding with -p flag} (creates new service)
+			- docker service ps <service-name> (shows the node where the service is started).
+			- docker service ps <service-name> (shows the status of the service).
+			- docker service rm <servce-name> (removes the given service).
+			- docker service scale <service-name> = <num> (scales the service to a particular <num>).		
+			- docker node update --availability <drain or active> <node-name> (if drain then the node will shutdown else if latter then the node will start -if any node goes down then only the started node will get allocated-).
+			
+			(* we can use --mode global for the service to start on all the nodes
+			 we can even use --replicas <number> to start the service in any <number> of nodes)
+		 
+}		
+
