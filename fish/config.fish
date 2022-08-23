@@ -1,7 +1,9 @@
-
 if status is-interactive
 colorscript random
 alias clear="clear && colorscript random"
+alias vi="nvim"
+alias ls='exa -l --color=always --group-directories-first'
+alias la='exa -al --color=always --group-directories-first'
 starship init fish | source
 end
     # Commands to run in interactive sessions can go here
