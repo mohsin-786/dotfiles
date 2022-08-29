@@ -42,16 +42,16 @@ format-padding = 1
 label = %percentage%%
 label-foreground = ${color.background}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-ramp-5 = 
-ramp-6 = 
-ramp-7 = 
-ramp-8 = 
-ramp-9 = 
+ramp-0 = %{T3} %{T-}
+ramp-1 = %{T3} %{T-}
+ramp-2 = %{T3} %{T-}
+ramp-3 = %{T3} %{T-}
+ramp-4 = %{T3} %{T-}
+ramp-5 = %{T3} %{T-}
+ramp-6 = %{T3} %{T-}
+ramp-7 = %{T3} %{T-}
+ramp-8 = %{T3} %{T-}
+ramp-9 = %{T3} %{T-}
 ramp-font = 2
 ramp-foreground = ${color.background}
 
@@ -67,7 +67,7 @@ interval = 5
 format-volume = <ramp-volume><label-volume>
 
 format-muted = <label-muted>
-format-muted-prefix = "  "
+format-muted-prefix = %{T3} %{T-} 
 format-muted-prefix-font = 2
 format-muted-prefix-foreground = ${color.background}
 format-muted-prefix-background = ${color.magenta}
@@ -117,7 +117,7 @@ format-charging-prefix =
 format-discharging = <ramp-capacity><label-discharging>
 
 format-full = <label-full>
-format-full-prefix = " "
+format-full-prefix = %{T3} %{T-}
 format-full-prefix-font = 2
 format-full-prefix-foreground = ${color.background}
 format-full-prefix-background = ${color.blue}
@@ -134,20 +134,20 @@ label-charging-foreground = ${color.background}
 label-discharging-foreground = ${color.background}
 label-full-foreground = ${color.background}
 
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
-ramp-capacity-3 = " "
-ramp-capacity-4 = " "
+ramp-capacity-0 = %{T4}  %{T-}
+ramp-capacity-1 = %{T4}  %{T-}
+ramp-capacity-2 = %{T4}  %{T-}
+ramp-capacity-3 = %{T4}  %{T-}
+ramp-capacity-4 = %{T4}  %{T-}
 ramp-capacity-font = 2
 ramp-capacity-foreground = ${color.background}
 ramp-capacity-background = ${color.blue}
 
-animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
-animation-charging-3 = " "
-animation-charging-4 = " "
+animation-charging-0 = %{T3}  %{T-}
+animation-charging-1 = %{T3}  %{T-}
+animation-charging-2 = %{T3}  %{T-}
+animation-charging-3 = %{T3}  %{T-}
+animation-charging-4 = %{T3}  %{T-}
 animation-charging-font = 2
 animation-charging-foreground = ${color.background}
 animation-charging-background = ${color.blue}
@@ -320,7 +320,7 @@ label-private = " | Private"
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = %{T3} %{T-} 
 format-padding = 0
 format-prefix-foreground = ${color.background}
 format-foreground = ${color.background}
@@ -336,7 +336,7 @@ format-margin = 0
 time = "%I:%M %p"
 time-alt = "%A, %m/%d/%y"
 
-format-prefix = 
+format-prefix = %{T3} %{T-}
 format-prefix-foreground = ${color.background}
 format-prefix-background = ${color.blue}
 
@@ -355,12 +355,12 @@ interval = 30
 fixed-values = true
 
 format-mounted = <label-mounted>
-format-mounted-prefix = " "
+format-mounted-prefix =%{T3} %{T-}
 format-mounted-prefix-foreground = ${color.background}
 format-mounted-prefix-background = ${color.cyan}
 
 format-unmounted = <label-unmounted>
-format-unmounted-prefix = " "
+format-unmounted-prefix = %{T3} %{T-}
 format-unmounted-prefix-foreground = ${color.background}
 format-unmounted-prefix-background = ${color.cyan}
 
@@ -379,7 +379,7 @@ type = internal/memory
 interval = 1
 
 format = <label>
-format-prefix = " "
+format-prefix = %{T3} %{T-}
 format-prefix-foreground = ${color.background}
 format-foreground = ${color.background}
 format-background = ${color.yellow}
