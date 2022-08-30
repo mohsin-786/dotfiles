@@ -93,7 +93,7 @@ myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
 myNormColor :: String       -- Border color of normal windows
-myNormColor   = "#282c34"  -- This variable is imported from Colors.THEME
+myNormColor   = "#ff0000"  -- This variable is imported from Colors.THEME
 
 myFocusColor :: String      -- Border color of focused windows
 myFocusColor  = "#46d9ff"    -- This variable is imported from Colors.THEME
@@ -106,11 +106,12 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
   spawnOnce "xsetroot -cursor_name left_ptr"
   spawnOnce "picom --config picom.conf"
   spawnOnce "nm-applet"
   spawnOnce "volumeicon"
-  spawnOnce "/home/aspect/.config/polybar/new/launch.sh"
+  spawnOnce "/home/sin/.config/polybar/new/launch.sh"
   -- spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
   -- spawnOnce "feh --randomize --bg-fill /usr/share/backgrounds/dtos-backgrounds/*"  -- feh set random wallpaper
   spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
