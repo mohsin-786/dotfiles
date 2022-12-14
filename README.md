@@ -1,3 +1,5 @@
                                             XMONAD + POLYBAR
                            
-![Screenshot from 2022-08-21 12-54-04](https://user-images.githubusercontent.com/109455638/185780456-fe5d82ba-3bd7-4902-9b00-4b08b4a4c31c.png)
+
+![2022-12-14_16-41](https://user-images.githubusercontent.com/109455638/207580834-fa986f79-1985-48de-8612-9cfa1a919dac.png)
+
