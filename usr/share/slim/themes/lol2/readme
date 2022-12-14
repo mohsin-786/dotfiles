@@ -1,0 +1,2 @@
+Copy this folder to /usr/share/slim/themes/ directory
+And use the name of this directory in /etc/slim.conf
