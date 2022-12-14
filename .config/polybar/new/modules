@@ -1,0 +1,442 @@
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/backlight]
+type = internal/xbacklight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+format = <ramp> <label>
+format-background = ${color.yellow}
+
+label = %percentage%%
+label-foreground = ${color.background}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-5 = 
+ramp-6 = 
+ramp-7 = 
+ramp-8 = 
+ramp-9 = 
+ramp-font = 2
+ramp-foreground = ${color.background}
+
+[module/brightness]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/brightness/
+card = ${system.graphics_card}
+
+enable-scroll = true
+
+format = <ramp> <label>
+format-background = ${color.red}
+format-padding = 1
+
+label = %percentage%%
+label-foreground = ${color.background}
+
+ramp-0 = %{T3} %{T-}
+ramp-1 = %{T3} %{T-}
+ramp-2 = %{T3} %{T-}
+ramp-3 = %{T3} %{T-}
+ramp-4 = %{T3} %{T-}
+ramp-5 = %{T3} %{T-}
+ramp-6 = %{T3} %{T-}
+ramp-7 = %{T3} %{T-}
+ramp-8 = %{T3} %{T-}
+ramp-9 = %{T3} %{T-}
+ramp-font = 2
+ramp-foreground = ${color.background}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/volume]
+type = internal/pulseaudio
+
+use-ui-max = false
+
+interval = 5
+
+format-volume = <ramp-volume><label-volume>
+
+format-muted = <label-muted>
+format-muted-prefix = %{T3} %{T-} 
+format-muted-prefix-font = 2
+format-muted-prefix-foreground = ${color.background}
+format-muted-prefix-background = ${color.magenta}
+
+label-volume = "%percentage%% "
+label-muted = "Mute"
+
+label-volume-background = ${color.magenta}
+label-muted-background = ${color.magenta}
+
+label-volume-foreground = ${color.background}
+label-muted-foreground = ${color.background}
+
+ramp-volume-0 = "  "
+ramp-volume-1 = "  "
+ramp-volume-2 = "  "
+ramp-volume-3 = "  "
+ramp-volume-4 = "  "
+ramp-volume-5 = "  "
+ramp-volume-6 = "  "
+ramp-volume-7 = "  "
+ramp-volume-8 = "  "
+ramp-volume-9 = "  "
+ramp-volume-font = 2
+ramp-volume-foreground = ${color.background}
+ramp-volume-background = ${color.magenta}
+
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = ${system.battery}
+adapter = ${system.adapter}
+
+poll-interval = 2
+time-format = %H:%M
+
+format-charging = <animation-charging><label-charging>
+format-charging-prefix = 
+
+format-discharging = <ramp-capacity><label-discharging>
+
+format-full = <label-full>
+format-full-prefix = %{T3} %{T-}
+format-full-prefix-font = 2
+format-full-prefix-foreground = ${color.background}
+format-full-prefix-background = ${color.blue}
+
+label-charging = "%percentage%% "
+label-discharging = "%percentage%% "
+label-full = "%percentage%% "
+
+label-charging-background = ${color.blue}
+label-discharging-background = ${color.blue}
+label-full-background = ${color.blue}
+
+label-charging-foreground = ${color.background}
+label-discharging-foreground = ${color.background}
+label-full-foreground = ${color.background}
+
+ramp-capacity-0 = %{T4}  %{T-}
+ramp-capacity-1 = %{T4}  %{T-}
+ramp-capacity-2 = %{T4}  %{T-}
+ramp-capacity-3 = %{T4}  %{T-}
+ramp-capacity-4 = %{T4}  %{T-}
+ramp-capacity-font = 2
+ramp-capacity-foreground = ${color.background}
+ramp-capacity-background = ${color.blue}
+
+animation-charging-0 = %{T3}  %{T-}
+animation-charging-1 = %{T3}  %{T-}
+animation-charging-2 = %{T3}  %{T-}
+animation-charging-3 = %{T3}  %{T-}
+animation-charging-4 = %{T3}  %{T-}
+animation-charging-font = 2
+animation-charging-foreground = ${color.background}
+animation-charging-background = ${color.blue}
+animation-charging-framerate = 750
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+[module/workspaces]
+type = internal/xworkspaces
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = false
+
+; Create click handler used to focus desktop
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle desktops
+; Default: true
+enable-scroll = true
+
+; icon-[0-9]+ = <desktop-name>;<icon>
+; NOTE: The desktop name needs to match the name configured by the WM
+; You can get a list of the defined desktops using:
+; $ xprop -root _NET_DESKTOP_NAMES
+icon-0 = ;               
+icon-1 = ;               
+icon-2 = ;					
+icon-3 = ;					
+icon-4 = ;				
+icon-5 = ;				
+icon-6 = ;				
+icon-7 = ;				
+icon-default = 
+
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(active|urgent|occupied|empty)>
+; Default: <label-state>
+format = <label-state>
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-active = %name%
+label-active-foreground = ${color.pink1}
+label-active-underline = ${color.blue1}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-occupied = %name%
+label-occupied-foreground = ${color.green}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-urgent = %name%
+label-urgent-foreground = ${color.red1}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-empty = %name%
+label-empty-foreground = ${color.foreground}
+
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1
+
+
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+inline-mode = false
+
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+
+fuzzy-match = true
+
+ws-icon-0=I;
+ws-icon-1=II;
+ws-icon-2=III;
+ws-icon-3=IV;
+ws-icon-4=V;
+ws-icon-5=VI;
+ws-icon-6=VII;漣
+ws-icon-default = 
+
+format = <label-state>
+format-font = 2
+
+label-monitor = %name%
+
+label-focused = %name%
+label-focused-foreground = ${color.blue}
+label-focused-background = ${color.background}
+label-focused-underline =  ${color.blue}
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-foreground = ${color.green}
+label-occupied-background = ${color.background}
+;label-occupied-underline = 
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-foreground = ${color.red}
+label-urgent-background = ${color.background}
+label-urgent-underline =  ${color.red}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${color.foreground}
+label-empty-padding = 1
+
+; Separator in between workspaces
+label-separator = "∙"
+label-separator-padding = 0
+label-separator-foreground = ${color.altblack} 
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/mod]
+type = internal/bspwm
+
+format = <label-mode>
+format-background = ${color.magenta}
+format-foreground = ${color.background}
+format-padding = 1
+format-font = 5
+
+label-monocle = "[M]"
+label-tiled = "[]="
+
+label-floating = ", ><>"
+label-pseudotiled = ", Pseudo"
+label-fullscreen = ", Full"
+
+label-locked = " | Locked"
+label-sticky = " | Sticky"
+label-private = " | Private"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = %{T3} %{T-} 
+format-padding = 0
+format-prefix-foreground = ${color.background}
+format-foreground = ${color.background}
+format-background = ${color.green}
+label = "%{A1:terminal -e gtop &:}%percentage%% %{A}"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/time]
+type = internal/date
+interval = 1
+format-margin = 0
+time = "%I:%M %p"
+time-alt = "%A, %m/%d/%y"
+
+format-prefix = %{T3} %{T-}
+format-prefix-foreground = ${color.background}
+format-prefix-background = ${color.blue}
+
+label = %time%
+label-foreground = ${color.background}
+label-background = ${color.blue}
+label-padding = 1
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+interval = 30
+fixed-values = true
+
+format-mounted = <label-mounted>
+format-mounted-prefix =%{T3} %{T-}
+format-mounted-prefix-foreground = ${color.background}
+format-mounted-prefix-background = ${color.cyan}
+
+format-unmounted = <label-unmounted>
+format-unmounted-prefix = %{T3} %{T-}
+format-unmounted-prefix-foreground = ${color.background}
+format-unmounted-prefix-background = ${color.cyan}
+
+label-mounted = "%{A1:terminal -e ncdu &:} %free%%{A}"
+label-unmounted = " %mountpoint%: NA"
+label-mounted-foreground = ${color.background}
+
+label-mounted-background = ${color.cyan}
+label-unmounted-background = ${color.cyan}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/memory]
+type = internal/memory
+
+interval = 1
+
+format = <label>
+format-prefix = %{T3} %{T-}
+format-prefix-foreground = ${color.background}
+format-foreground = ${color.background}
+format-background = ${color.yellow}
+
+label = "%{A1:terminal -e htop &:} %mb_used% %{A}"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/launcher]
+type=custom/text
+content = 
+content-font = 3
+content-foreground= ${color.background}
+content-background = ${color.blue} 
+content-padding = 1
+click-left = "/home/aspect/.config/rofi/launchers/text/launcher.sh"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/wired-network]
+type = internal/network
+interface = ${system.network_interface}
+
+[module/wireless-network]
+type = internal/network
+interface = ${system.network_interface}
+
+[module/network]
+type = internal/network
+interface = ${system.network_interface}
+
+interval = 1.0
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = <ramp-signal><label-connected>
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " 睊 "
+format-disconnected-prefix-font = 2
+format-disconnected-foreground = ${color.background}
+format-disconnected-background = ${color.green}
+
+label-connected = "%{A1:networkmanager_dmenu &:} %essid% %{F#f7768E}%{F-} %downspeed%%{A}"
+label-disconnected = "%{A1:networkmanager_dmenu &:} Offline%{A}"
+
+label-connected-foreground = ${color.red}
+label-disconnected-foreground = ${color.background}
+
+label-connected-background = ${color.black}
+label-disconnected-background = ${color.green}
+
+ramp-signal-0 = "  "
+ramp-signal-1 = "  "
+ramp-signal-2 = "  "
+ramp-signal-3 = "  "
+ramp-signal-4 = "  "
+ramp-signal-foreground = ${color.green}
+ramp-signal-background = ${color.black}
+ramp-signal-font = 2
