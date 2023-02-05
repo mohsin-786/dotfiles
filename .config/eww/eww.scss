@@ -2,8 +2,96 @@
   all: unset;
 }
 
-@import "colors.scss";
-@import "date/date.scss";
-@import "dashboard/eww.scss";
+$base: #050508;
+$mantle: #181825;
+$crust: #11111b;
+$text: #cdd6f4;
+$subtext0: #a6adc8;
+$subtext1: #bac2de;
+$surface0: #313244;
+$surface1: #45475a;
+$surface2: #585b70;
+$overlay0: #6c7086;
+$overlay1: #7f849c;
+$overlay2: #9399b2;
+$blue: #89b4fa;
+$lavender: #b4befe;
+$sapphire: #74c7ec;
+$sky: #89dceb;
+$teal: #94e2d5;
+$green: #a6e3a1;
+$yellow: #f9e2af;
+$peach: #fab387;
+$maroon: #eba0ac;
+$red: #f38ba8;
+$mauve: #cba6f7;
+$pink: #f5c2e7;
+$flamingo: #f2cdcd;
+$rosewater: #f5e0dc;
+$transparent: #ff0000;
 
+.cal-inner-container,
+.cal-outer-container {
+  font-family: Sugar Snow;
+  font-size: 1em;
+  color: $text;
+  background-color: $base;
+  border-radius: 10px;
+  padding: 0em;
+}
 
+.cal-inner-elems {
+  padding: 1em;
+}
+
+.cal-outer-elems {
+  padding: 1em;
+}
+
+.cal-date {
+  font-family: Sugar Snow;
+  font-size: 1.1em;
+  color: $base;
+  background-color: $green;
+  border-radius: 2em;
+  padding: 0.8em;
+  margin: 1em;
+}
+
+calendar.button {
+  color: $rosewater;
+  font-weight: bold;
+}
+
+calendar.header,
+calendar.highlight,
+calendar:selected {
+  color: $green;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: $surface1;
+}
+
+.profile-container {
+  background-color: $base;
+  border-radius: 8px;
+  padding: 1em;
+}
+
+.profile-pic {
+  background-repeat: no-repeat;
+  background-size: 250px;
+  min-height: 250px;
+  min-width: 250px;
+  border-radius: 2em;
+}
+
+.quote {
+  font-family: Vanilla Caramel;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+  color: $green;
+}

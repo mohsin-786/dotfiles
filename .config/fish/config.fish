@@ -42,4 +42,3 @@ end
     set -g fish_pager_color_description $comment
     
   
-fish_add_path /home/sin/.spicetify

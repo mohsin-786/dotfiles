@@ -177,14 +177,15 @@ enable-scroll = true
 ; NOTE: The desktop name needs to match the name configured by the WM
 ; You can get a list of the defined desktops using:
 ; $ xprop -root _NET_DESKTOP_NAMES
-icon-0 = ;               
-icon-1 = ;               
-icon-2 = ;					
-icon-3 = ;					
-icon-4 = ;				
-icon-5 = ;				
-icon-6 = ;				
-icon-7 = ;				
+icon-0 = one;               
+icon-1 = two;               
+icon-2 = thr;					
+icon-3 = for;					
+icon-4 = fiv;				
+icon-5 = six;				
+icon-6 = sev;				
+icon-7 = eit;	
+icon-8 = nin; 			
 icon-default = 
 
 ; Available tags:
