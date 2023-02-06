@@ -20,7 +20,6 @@ import qualified XMonad.Actions.Search as S
 import Data.Char (isSpace, toUpper)
 import Data.Maybe (fromJust)
 import Data.Monoid
-import Control.Monad
 import Data.Maybe (isJust)
 import Data.Tree
 import qualified Data.Map as M
@@ -109,13 +108,10 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
   spawnOnce "xsetroot -cursor_name left_ptr"
-  spawnOnce "picom --experimental-backends"
+  spawnOnce "picom --config picom.conf"
   spawnOnce "nm-applet"
-  spawnOnce "dunst"
-  spawnOnce "greenclip daemon"
-  spawnOnce "exec ~/bin/eww daemon"
-  spawnOnce "volumeicon"
-  spawnOnce "/home/sin/.config/polybar/new/launch.sh"
+ -- spawnOnce "volumeicon"
+  --spawnOnce "/home/sin/.config/polybar/new/launch.sh"
   -- spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
   -- spawnOnce "feh --randomize --bg-fill /usr/share/backgrounds/dtos-backgrounds/*"  -- feh set random wallpaper
   spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
@@ -391,14 +387,6 @@ myTabTheme = def { fontName            = myFont
                  , inactiveTextColor   = "#dfdfdf"
                  }
 
--- Theme for showWName which prints current workspace when you change workspaces.
-myShowWNameTheme :: SWNConfig
-myShowWNameTheme = def
-  { swn_font              = "xft:Ubuntu:bold:size=60"
-  , swn_fade              = 1.0
-  , swn_bgcolor           = "#1c1f24"
-  , swn_color             = "#ffffff"
-  }
 
 -- The layout hook
 myLayoutHook = avoidStruts
@@ -418,8 +406,9 @@ myLayoutHook = avoidStruts
                                            ||| tallAccordion
                                            ||| wideAccordion
 
--- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
-myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
+myWorkspaces = ["\129718","\62746","\63189","\63343","\57437 ","\63202","\63208","\63460","\58058" ]
+--myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
+--myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9"]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -471,25 +460,6 @@ showKeybindings x = addName "Show Keybindings" $ io $ do
   hPutStr h (unlines $ showKmSimple x) -- showKmSimple doesn't add ">>" to subtitles
   hClose h
   return ()
-  
-clipboardy :: MonadIO m => m () -- Don't question it 
-clipboardy = spawn "rofi -modi \"\63053 :greenclip print\" -show \"\63053 \" -run-command '{cmd}' -theme ~/.config/rofi/launcher/style.rasi"
---centerlaunch :: MonadIO m => m ()
---centerlaunch = spawn "exec ~/bin/eww open-many blur_full weather profile quote search_full disturb-icon vpn-icon home_dir screenshot power_full reboot_full lock_full logout_full suspend_full"
-dash :: MonadIO m => m ()
-dash = spawn "exec ~/bin/eww --config /home/sin/.config/eww/dashboard open-many background profile system clock uptime music github reddit twitter youtube weather apps mail logout sleep reboot poweroff folders"
-ewwclose :: MonadIO m => m ()
-ewwclose = spawn "exec killall eww"
-ewwdae :: MonadIO m => m ()
-ewwdae = spawn "exec eww daemon" 
-maimcopy :: MonadIO m => m ()
-maimcopy = spawn "maim -s | xclip -selection clipboard -t image/png && notify-send \"Screenshot\" \"Copied to Clipboard\" -i flameshot"
-maimsave :: MonadIO m => m ()
-maimsave = spawn "maim -s ~/Desktop/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send \"Screenshot\" \"Saved to Desktop\" -i flameshot"
-rofi_launcher :: MonadIO m => m ()
-rofi_launcher = spawn "rofi -no-lazy-grab -show drun"
-calendar :: MonadIO m => m ()
-calendar = spawn "exec ~/bin/eww open date"
 
 myKeys :: XConfig l0 -> [((KeyMask, KeySym), NamedAction)]
 myKeys c =
@@ -500,14 +470,8 @@ myKeys c =
   , ("M-S-r", addName "Restart XMonad"         $ spawn "xmonad --restart")
   , ("M-S-q", addName "Quit XMonad"            $ io exitSuccess)
   , ("M-q", addName "Kill focused window"    $ kill1)
-  --, ("M1-1", addName "Center Launch"    $ centerlaunch)
-  , ("M1-k", addName "Eww Close"    $ ewwclose)
-  , ("M1-o", addName "Eww daemon"   $ ewwdae)
-  , ("M1-2", addName "Eww dashboard"   $ dash)
- -- , ("M1-2", addName "Sidebar Launch"    $ sidebarlaunch)
-  , ("M1-3", addName "Calendar"    $ calendar)
   , ("M-y", addName "Toggle Bar"    $ spawn "polybar-msg cmd toggle")
-  , ("M-o", addName "Launch Rofi"            $ rofi_launcher)
+  , ("M-o", addName "Launch Rofi"            $ spawn "rofi -no-lazy-grab -show drun")
   , ("M-S-a", addName "Kill all windows on WS" $ killAll)
   , ("M-<Print>" , addName "Screenshot" $ spawn "gnome-screenshot -i")]
   --, ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "~/.local/bin/dm-run"])
@@ -654,6 +618,27 @@ myKeys c =
     where nonNSP          = WSIs (return (\ws -> W.tag ws /= "NSP"))
           nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "NSP"))
 
+myPolybar :: StatusBarConfig
+myPolybar =
+  def
+    { sbLogHook =
+        xmonadPropLog
+          =<< dynamicLogString polybarPP,
+      sbStartupHook = spawn "~/.config/polybar/dark/launch.sh",
+      sbCleanupHook = spawn "killall polybar"
+    }
+
+polybarPP :: PP
+polybarPP =
+  def
+    { ppCurrent = textColor "" . wrap "" "",
+      ppOrder = \(_ : l : _ : _) -> [l]
+    }
+
+textColor :: String -> String -> String
+textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
+
+
 main :: IO ()
 main = do
   -- Launching three instances of xmobar on their monitors.
@@ -661,7 +646,7 @@ main = do
   --xmproc1 <- spawnPipe ("xmobar -x 1 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   --xmproc2 <- spawnPipe ("xmobar -x 2 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   -- the xmonad, ya know...what the WM is named after!
-  xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ ewmh . docks $ ewmhFullscreen $ def
+  xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ withSB myPolybar $ ewmh . docks $ ewmhFullscreen $ def
     { manageHook         = myManageHook <+> manageDocks
     --, handleEventHook    =  docks
                            -- Uncomment this line to enable fullscreen support on things like YouTube/Netflix.
@@ -672,7 +657,7 @@ main = do
     , modMask            = myModMask
     , terminal           = myTerminal
     , startupHook        = myStartupHook
-    , layoutHook         = showWName' myShowWNameTheme $ myLayoutHook
+    , layoutHook         = myLayoutHook
     , workspaces         = myWorkspaces
     , borderWidth        = myBorderWidth
     , normalBorderColor  = myNormColor

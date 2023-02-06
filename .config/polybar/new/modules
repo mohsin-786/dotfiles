@@ -173,19 +173,15 @@ enable-click = true
 ; Default: true
 enable-scroll = true
 
-; icon-[0-9]+ = <desktop-name>;<icon>
-; NOTE: The desktop name needs to match the name configured by the WM
-; You can get a list of the defined desktops using:
-; $ xprop -root _NET_DESKTOP_NAMES
-icon-0 = one;               
-icon-1 = two;               
-icon-2 = thr;					
-icon-3 = for;					
-icon-4 = fiv;				
-icon-5 = six;				
-icon-6 = sev;				
-icon-7 = eit;	
-icon-8 = nin; 			
+icon-0 = 1;               
+icon-1 = 2;               
+icon-2 = 3;					
+icon-3 = 4;					
+icon-4 = 5;				
+icon-5 = 6;				
+icon-6 = 7;				
+icon-7 = 8;	
+icon-8 = 9; 			
 icon-default = 
 
 ; Available tags:
@@ -244,23 +240,25 @@ label-empty-padding = 1
 [module/bspwm]
 type = internal/bspwm
 
-pin-workspaces = true
+pin-workspaces = false
 inline-mode = false
 
 enable-click = true
 enable-scroll = true
 reverse-scroll = true
 
-fuzzy-match = true
+fuzzy-match =false
 
-ws-icon-0=I;
-ws-icon-1=II;
-ws-icon-2=III;
-ws-icon-3=IV;
-ws-icon-4=V;
-ws-icon-5=VI;
-ws-icon-6=VII;漣
-ws-icon-default = 
+ws-icon-0=1;
+ws-icon-1=2;
+ws-icon-2=3;
+ws-icon-3=4;
+ws-icon-4=5;
+ws-icon-5=6I;
+ws-icon-6=7;漣
+ws-icon-7=8;
+ws-icon-8=9;
+ws-icon-default = 5
 
 format = <label-state>
 format-font = 2
