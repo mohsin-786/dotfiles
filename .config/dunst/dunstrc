@@ -57,13 +57,13 @@
     background = "#050508"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     background = "#050508"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
-    timeout = 10
+    timeout = 8
 
 [urgency_critical]
     background = "#050508"
@@ -94,5 +94,15 @@
 	summary = Disconnected
 	timeout = 6
 	new_icon = ~/.config/dunst/icons/no-wifi.png
+	
+[Battery (AC on)]
+	summary = Charging
+	timeout  = 3
+	new_icon = ~/.config/dunst/icons/battery-charging.png
+	
+[Battery (AC off)]
+	summary = Discharging
+	timeout  = 3
+	new_icon = ~/.config/dunst/icons/battery-discharged.png
 	
 
