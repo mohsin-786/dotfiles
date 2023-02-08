@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/sin/.config/wpg/wallpapers/dark_arts_custom.png"
+let background = "#01080F"
+let foreground = "#a3d8c1"
+let cursor     = "#a3d8c1"
+
+" Colors
+let color0  = "#01080F"
+let color1  = "#2B635D"
+let color2  = "#346C69"
+let color3  = "#47776E"
+let color4  = "#229B65"
+let color5  = "#528979"
+let color6  = "#5F9C89"
+let color7  = "#a3d8c1"
+let color8  = "#729787"
+let color9  = "#2B635D"
+let color10 = "#346C69"
+let color11 = "#47776E"
+let color12 = "#229B65"
+let color13 = "#528979"
+let color14 = "#5F9C89"
+let color15 = "#a3d8c1"

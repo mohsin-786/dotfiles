@@ -1,0 +1,21 @@
+set $wallpaper /home/sin/.config/wpg/wallpapers/dark_arts_custom.png
+
+set $background #01080F
+set $foreground #a3d8c1
+
+set $color0 #01080F
+set $color1 #2B635D
+set $color2 #346C69
+set $color3 #47776E
+set $color4 #229B65
+set $color5 #528979
+set $color6 #5F9C89
+set $color7 #a3d8c1
+set $color8 #729787
+set $color9 #2B635D
+set $color10 #346C69
+set $color11 #47776E
+set $color12 #229B65
+set $color13 #528979
+set $color14 #5F9C89
+set $color15 #a3d8c1

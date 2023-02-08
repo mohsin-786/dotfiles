@@ -69,6 +69,9 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
+-- Colors
+import Colors
+
    
 myFont :: String
 myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
@@ -92,11 +95,11 @@ myFile = "thunar"  -- Sets Thunar as file manager
 myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
-myNormColor :: String       -- Border color of normal windows
-myNormColor   = "#ff0000"  -- This variable is imported from Colors.THEME
+--myNormColor :: String       -- Border color of normal windows
+--myNormColor   = "#ff0000"  -- This variable is imported from Colors.THEME
 
-myFocusColor :: String      -- Border color of focused windows
-myFocusColor  = "#46d9ff"    -- This variable is imported from Colors.THEME
+--myFocusColor :: String      -- Border color of focused windows
+--myFocusColor  = "#46d9ff"    -- This variable is imported from Colors.THEME
 
 mySoundPlayer :: String
 mySoundPlayer = "ffplay -nodisp -autoexit " -- The program that will play system sounds
@@ -602,11 +605,11 @@ myKeys c =
   , ("<XF86AudioPrev>", addName "audacious prev"           $ spawn "audacious -r")
   , ("<XF86AudioNext>", addName "audacious next"           $ spawn "audacious -f")
   , ("<XF86AudioStop>", addName "audacious stop"           $ spawn "audacious -s")
-  , ("<XF86AudioMute>", addName "Toggle audio mute"        $ spawn "pamixer -t")
-  , ("<XF86MonBrightnessUp>", addName "Toggle brightness up"   $ spawn "brightnessctl set 15+")
-  , ("<XF86MonBrightnessDown>", addName "Toggle brightness down"   $ spawn "brightnessctl set 15-")
-  , ("<XF86AudioLowerVolume>", addName "Lower vol"    $ spawn "pamixer -d 5")
-  , ("<XF86AudioRaiseVolume>", addName "Raise vol"    $ spawn "pamixer -i 5")
+  , ("<XF86AudioMute>", addName "Toggle audio mute"        $ spawn "/home/sin/.config/scripts/volume.sh mute")
+  , ("<XF86MonBrightnessUp>", addName "Toggle brightness up"   $ spawn "~/.config/scripts/light.sh inc 5")
+  , ("<XF86MonBrightnessDown>", addName "Toggle brightness down"   $ spawn "~/.config/scripts/light.sh dec 5")
+  , ("<XF86AudioLowerVolume>", addName "Lower vol"    $ spawn "~/.config/scripts/volume.sh down")
+  , ("<XF86AudioRaiseVolume>", addName "Raise vol"    $ spawn "~/.config/scripts/volume.sh up")
  -- , ("<XF86Home>", addName "Open home page"       $ spawn (myBrowser ++ " https://www.youtube.com/c/DistroTube"))
  -- , ("<XF86Search>", addName "Web search (dmscripts)" $ spawn "dm-websearch")
  -- , ("<XF86Mail>", addName "Email client"             $ runOrRaise "thunderbird" (resource =? "thunderbird"))
@@ -660,8 +663,8 @@ main = do
     , layoutHook         = myLayoutHook
     , workspaces         = myWorkspaces
     , borderWidth        = myBorderWidth
-    , normalBorderColor  = myNormColor
-    , focusedBorderColor = myFocusColor
+    , normalBorderColor  = color0
+    , focusedBorderColor = color8
     
         --{ ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
           --              >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
