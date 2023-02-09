@@ -1,0 +1,90 @@
+# YAY aur helper #
+		git clone https://aur.archlinux.org/yay.git
+
+# Packages #
+ 
+	--File Manager--
+			yay -S thunar ffmpegthumbnailer poppler-glib tumbler
+ 
+	--IDE--
+			yay -S vscodium-bin vscodium-bin-marketplace
+			yay -S geany
+			yay -S neovim
+	 
+	--Browser--
+			yay -S brave-bin
+ OR,
+			yay -S firefox
+ 
+	--Office--
+			yay -S libreoffice
+ 
+	--GIT UI--
+			yay -S lazygit
+ 
+	--Shell & Terminal--
+			 yay -S fish starship shell-color-scripts
+			 yay -S alacritty 
+			 
+	--Icons--
+			yay -S beautyline lxappearance
+ 
+	--Screenshot--
+			yay -S flameshot 
+ 
+	--Video Player--
+			yay -S celluloid
+ 
+	--Music Player--
+			yay -S audacious
+ 
+	--Audio--
+			yay -S pipewire pamixer
+ 
+	--Mail--
+			yay -S thunderbird
+ 
+	--Menu--
+			yay -S rofi
+ 
+	--Lockscreen--
+			yay -S betterlockscreen
+ 
+	--Notification--
+			yay -S dunst
+ 
+	--Widgets--
+			yay -S eww
+			
+	--Window Manager--
+			yay -S xmonad xmonad-contrib
+			
+	--Bar--
+			yay -S polybar
+			
+	--Brightness--
+		yay -S light
+		
+	--Authenticator--
+		yay -S polkit-gnome
+		
+	--Wallpaper Changer--
+		yay -S nitrogen
+		
+# Extras# 
+	
+	--Containerizer and Orchestrator--
+		yay -S docker kubectl minikube
+		
+	--Virtual Machine--
+		yay -S virt-manager
+		
+	--Bootable device maker--
+		yay -S balena-etcher
+		
+	--Theme changer--
+		yay -S wpgtk
+		
+ 
+ 
+ 
