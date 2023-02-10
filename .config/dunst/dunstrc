@@ -39,6 +39,7 @@
     history_length = 6
     dmenu = /usr/bin/dmenu -p dunst:
     browser =  /usr/bin/brave
+    icon_path = /usr/share/icons/BeautyLine/apps/scalable
     always_run_script = true
     title = Dunst
     class = Dunst
@@ -104,5 +105,10 @@
 	summary = Discharging
 	timeout  = 3
 	new_icon = ~/.config/dunst/icons/battery-discharged.png
+	
+[Battery (Full)]
+	summary = Full
+	timeout  = 5
+	new_icon = ~/.config/dunst/icons/battery-full.png
 	
 

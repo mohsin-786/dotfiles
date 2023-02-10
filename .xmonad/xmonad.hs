@@ -93,7 +93,7 @@ myFile :: String
 myFile = "thunar"  -- Sets Thunar as file manager
 
 myBorderWidth :: Dimension
-myBorderWidth = 2           -- Sets border width for windows
+myBorderWidth = 5           -- Sets border width for windows
 
 --myNormColor :: String       -- Border color of normal windows
 --myNormColor   = "#ff0000"  -- This variable is imported from Colors.THEME
@@ -113,10 +113,7 @@ myStartupHook = do
   spawnOnce "xsetroot -cursor_name left_ptr"
   spawnOnce "picom --config picom.conf"
   spawnOnce "nm-applet"
- -- spawnOnce "volumeicon"
-  --spawnOnce "/home/sin/.config/polybar/new/launch.sh"
-  -- spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
-  -- spawnOnce "feh --randomize --bg-fill /usr/share/backgrounds/dtos-backgrounds/*"  -- feh set random wallpaper
+  spawnOnce "~/.config/scripts/bat.sh"
   spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
   setWMName "LG3D"
 
@@ -179,17 +176,6 @@ runSelectedAction' conf actions = do
     case selectedActionM of
         Just selectedAction -> selectedAction
         Nothing -> return ()
-
--- gsCategories =
---   [ ("Games",      spawnSelected' gsGames)
---   --, ("Education",   spawnSelected' gsEducation)
---   , ("Internet",   spawnSelected' gsInternet)
---   , ("Multimedia", spawnSelected' gsMultimedia)
---   , ("Office",     spawnSelected' gsOffice)
---   , ("Settings",   spawnSelected' gsSettings)
---   , ("System",     spawnSelected' gsSystem)
---   , ("Utilities",  spawnSelected' gsUtilities)
---   ]
 
 gsCategories =
   [ ("Games",      "xdotool key super+alt+1")
@@ -279,7 +265,6 @@ gsUtilities =
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                , NS "mocp" spawnMocp findMocp manageMocp
                 , NS "calculator" spawnCalc findCalc manageCalc
                 ]
   where
@@ -287,26 +272,18 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
     findTerm   = title =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
                where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnMocp  = myTerminal ++ " -t mocp -e mocp"
-    findMocp   = title =? "mocp"
-    manageMocp = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
+                 h = 0.5
+                 w = 0.5
+                 t = 0.75 -h
+                 l = 0.75 -w
     spawnCalc  = "qalculate-gtk"
     findCalc   = className =? "Qalculate-gtk"
     manageCalc = customFloating $ W.RationalRect l t w h
                where
-                 h = 0.5
-                 w = 0.4
-                 t = 0.75 -h
-                 l = 0.70 -w
+                 h = 0.52
+                 w = 0.42
+                 t = 0.77 -h
+                 l = 0.72 -w
 
 --Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -435,20 +412,8 @@ myManageHook = composeAll
   , className =? "toolbar"         --> doFloat
   , className =? "Yad"             --> doCenterFloat
   --, title =? "Oracle VM VirtualBox Manager"  --> doFloat
-  --, title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
-  --, className =? "Brave-browser"   --> doShift ( myWorkspaces !! 1 )
-  --,className =? "mpv"             --> doShift ( myWorkspaces !! 7 )
-  --, className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
-  --, className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
-  --, (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
   , isFullscreen -->  doFullFloat
   ] <+> namedScratchpadManageHook myScratchPads
-
---soundDir = "/opt/dtos-sounds/" -- The directory that has the sound files
-
---startupSound  = soundDir ++ "startup-01.mp3"
---shutdownSound = soundDir ++ "shutdown-01.mp3"
-
 
 subtitle' ::  String -> ((KeyMask, KeySym), NamedAction)
 subtitle' x = ((0,0), NamedAction $ map toUpper
@@ -477,9 +442,7 @@ myKeys c =
   , ("M-o", addName "Launch Rofi"            $ spawn "rofi -no-lazy-grab -show drun")
   , ("M-S-a", addName "Kill all windows on WS" $ killAll)
   , ("M-<Print>" , addName "Screenshot" $ spawn "gnome-screenshot -i")]
-  --, ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "~/.local/bin/dm-run"])
-  --, ("M-/", addName "DTOS Help"                $ spawn "~/.local/bin/dtos-help")]
-
+ 
   ^++^ subKeys "Switch to workspace"
   [ ("M-1", addName "Switch to workspace 1"    $ (windows $ W.greedyView $ myWorkspaces !! 0))
   , ("M-2", addName "Switch to workspace 2"    $ (windows $ W.greedyView $ myWorkspaces !! 1))
@@ -522,10 +485,6 @@ myKeys c =
   [ ("M-<Return>", addName "Launch terminal"   $ spawn (myTerminal))
   , ("M-b", addName "Launch web browser"       $ spawn (myBrowser))
   , ("M-S-<Return>", addName "Launch file manager"    $ spawn (myFile))]
-
-  -- ^++^ subKeys "Monitors"
-  --[ ("M-.", addName "Switch focus to next monitor" $ nextScreen)
-  --, ("M-,", addName "Switch focus to prev monitor" $ prevScreen)]
 
   -- Switch layouts
   ^++^ subKeys "Switch layouts"
@@ -578,9 +537,9 @@ myKeys c =
   -- When you toggle them to show, it brings them to current workspace.
   -- Toggle them to hide and it sends them back to hidden workspace (NSP).
   ^++^ subKeys "Scratchpads"
-  [ ("M-s t", addName "Toggle scratchpad terminal"   $ namedScratchpadAction myScratchPads "terminal")
-  , ("M-s m", addName "Toggle scratchpad mocp"       $ namedScratchpadAction myScratchPads "mocp")
-  , ("M-s c", addName "Toggle scratchpad calculator" $ namedScratchpadAction myScratchPads "calculator")]
+  [ ("M-t", addName "Toggle scratchpad terminal"   $ namedScratchpadAction myScratchPads "terminal")
+  , ("M-g", addName "Toggle scratchpad mocp"       $ namedScratchpadAction myScratchPads "geany")
+  , ("M-c", addName "Toggle scratchpad calculator" $ namedScratchpadAction myScratchPads "calculator")]
 
   
   ^++^ subKeys "GridSelect"
@@ -610,12 +569,8 @@ myKeys c =
   , ("<XF86MonBrightnessDown>", addName "Toggle brightness down"   $ spawn "~/.config/scripts/light.sh dec 5")
   , ("<XF86AudioLowerVolume>", addName "Lower vol"    $ spawn "~/.config/scripts/volume.sh down")
   , ("<XF86AudioRaiseVolume>", addName "Raise vol"    $ spawn "~/.config/scripts/volume.sh up")
- -- , ("<XF86Home>", addName "Open home page"       $ spawn (myBrowser ++ " https://www.youtube.com/c/DistroTube"))
- -- , ("<XF86Search>", addName "Web search (dmscripts)" $ spawn "dm-websearch")
- -- , ("<XF86Mail>", addName "Email client"             $ runOrRaise "thunderbird" (resource =? "thunderbird"))
- -- , ("<XF86Calculator>", addName "Calculator"         $ runOrRaise "qalculate-gtk" (resource =? "qalculate-gtk"))
- -- , ("<XF86Eject>", addName "Eject /dev/cdrom"        $ spawn "eject /dev/cdrom")
-  , ("<Print>", addName "Take screenshot (dmscripts)" $ spawn "dm-maim")
+  , ("<Print>", addName "Flameshot GUI" $ spawn "flameshot gui")
+  , ("S-<Print>", addName "Take full screenshot" $ spawn "flameshot full")
   ]
   -- The following lines are needed for named scratchpads.
     where nonNSP          = WSIs (return (\ws -> W.tag ws /= "NSP"))
@@ -641,22 +596,11 @@ polybarPP =
 textColor :: String -> String -> String
 textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
 
-
 main :: IO ()
 main = do
-  -- Launching three instances of xmobar on their monitors.
-  --xmproc0 <- spawnPipe ("xmobar -x 0 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
-  --xmproc1 <- spawnPipe ("xmobar -x 1 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
-  --xmproc2 <- spawnPipe ("xmobar -x 2 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
-  -- the xmonad, ya know...what the WM is named after!
+  -- 
   xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ withSB myPolybar $ ewmh . docks $ ewmhFullscreen $ def
     { manageHook         = myManageHook <+> manageDocks
-    --, handleEventHook    =  docks
-                           -- Uncomment this line to enable fullscreen support on things like YouTube/Netflix.
-                           -- This works perfect on SINGLE monitor systems. On multi-monitor systems,
-                           -- it adds a border around the window if screen does not have focus. So, my solution
-                           -- is to use a keybinding to toggle fullscreen noborders instead.  (M-<Space>)
-                           -- <+> fullscreenEventHook
     , modMask            = myModMask
     , terminal           = myTerminal
     , startupHook        = myStartupHook
@@ -666,27 +610,5 @@ main = do
     , normalBorderColor  = color0
     , focusedBorderColor = color8
     
-        --{ ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
-          --              >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
-            --            >> hPutStrLn xmproc2 x   -- xmobar on monitor 3
-        --, ppCurrent = xmobarColor color06 "" . wrap
-              --        ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
-          -- Visible but not current workspace
-        --, ppVisible = xmobarColor color06 "" . clickable
-          -- Hidden workspace
-        --, ppHidden = xmobarColor color05 "" . wrap
-                --     ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
-          -- Hidden workspaces (no windows)
-        --, ppHiddenNoWindows = xmobarColor color05 ""  . clickable
-          -- Title of active window
-        --, ppTitle = xmobarColor color16 "" . shorten 60
-          -- Separator character
-        --, ppSep =  "<fc=" ++ color09 ++ "> <fn=1>|</fn> </fc>"
-          -- Urgent workspace
-          -- , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
-          -- Adding # of windows on current workspace to the bar
-        -- , ppExtras  = [windowCount]
-          -- order of things in xmobar
-        -- , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-        }
+}
     
