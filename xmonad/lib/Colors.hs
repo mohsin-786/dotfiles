@@ -1,0 +1,1 @@
+/home/sin/.cache/wal/colors.hs
