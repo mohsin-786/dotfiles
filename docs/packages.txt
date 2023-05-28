@@ -4,7 +4,7 @@
 # Packages #
  
 	--File Manager--
-			yay -S thunar ffmpegthumbnailer poppler-glib tumbler
+			yay -S thunar ffmpegthumbnailer poppler-glib tumbler gvfs-mtp jmtpfs
  
 	--IDE--
 			yay -S vscodium-bin vscodium-bin-marketplace
