@@ -1,9 +1,11 @@
 if status is-interactive
 colorscript random
 alias clear="clear && colorscript random"
-alias vi="nvim"
+alias vi="lvim"
+alias fc="sudo fancontrol"
 alias ls='exa -l --color=always --group-directories-first'
 alias la='exa -al --color=always --group-directories-first'
+alias logout='loginctl terminate-user $USER'
 starship init fish | source
 end
     # Commands to run in interactive sessions can go here
@@ -41,4 +43,6 @@ end
     set -g fish_pager_color_completion $foreground
     set -g fish_pager_color_description $comment
     
-  
+    #Path
+
+    set PATH /home/sin/.local/bin $PATH
